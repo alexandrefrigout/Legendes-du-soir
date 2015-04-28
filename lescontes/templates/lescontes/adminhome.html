@@ -1,0 +1,33 @@
+{% extends 'lescontes/baseadm.html' %}
+{% block body %}
+<div align="center">
+<table class="table table-hover">
+	<thead>
+		<tr>
+		<th width="25%">Titre</th>
+		<th width="50%">Resume</th>
+		<th width="5%">Langue</th>
+		<th width="10%"></th>
+		<th width="10%"></th>
+		</tr>
+	</thead>
+	<tbody>
+		{% if tous_les_contes %}
+		{% for livre in tous_les_contes %}
+		<tr>
+		<td>{{livre.booktype}}: {{livre.titre}}</td>
+		<td><font face="Comic Sans MS"><b>{{livre.resume}}</b></font><font face="Helvetica"><i><br>L'auteur te propose deux fins possibles. Apr&egraves les avoir lues, imagine et &eacutecris un troisi&egraveme d&eacutenouement, envoie le (avec tes nom, pr&eacutenom, &acircge et pays) à  <a href="mailto:legendesdusoir@gmail.com">legendesdusoir@gmail.com</a>. Babeth Tautey lira ta proposition et les meilleures seront publi&eacutees.</i></font></td>
+		<td>{{livre.langue}}</td>
+		<td>
+			<a class="btn btn-danger" href="/deleteibook/{{livre.id}}">Supprimer <i class="icon-remove icon-white"></i></a>
+		</td>
+		<td>
+			<a class="btn btn-warning" href="/editibook/{{livre.id}}">Modifier <i class="icon-edit icon-white"></i></a>
+		</td>
+		</tr>
+		{% endfor %}
+		{% endif %}
+	</tbody>
+</table>
+</div>
+{% endblock %}

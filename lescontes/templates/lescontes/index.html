@@ -1,0 +1,67 @@
+{% extends 'lescontes/base.html' %}
+{% block body %}
+<div align="center">
+<table class="tablesorter table table-hover" id="sortTable">
+	<thead>
+		<tr>
+		<th width="30%"><font face="Comic Sans MS">Titre</font></th>
+		<th width="50%"><font face="Comic Sans MS">R&eacutesum&eacute</font></th>
+		<th width="8%"><font face="Comic Sans MS">Langue</font></th>
+		<th width="12%"><font face="Comic Sans MS">Acheter</font></th>
+		</tr>
+	</thead>
+	<tbody>
+		{% if tous_les_contes %}
+		{% for livre in tous_les_contes %}
+		<tr>
+		<td><font face="Comic Sans MS"><b>{{livre.booktype}}:</b></font> <font face="Helvetica"><i>{{livre.titre}}</i></font></td>
+		<td><font face="Comic Sans MS"><b>{{livre.resume}}</b></font><font face="Helvetica"><i><br>L'auteur te propose deux fins possibles. Apr&egraves les avoir lues, imagine et &eacutecris un troisi&egraveme d&eacutenouement, envoie le (avec tes nom, pr&eacutenom, &acircge et pays) à <a href="mailto:legendesdusoir@gmail.com">legendesdusoir@gmail.com</a>. Babeth Tautey lira ta proposition et les meilleures seront publi&eacutees.</i></font></td>
+		<td><font face="Comic Sans MS">{{livre.langue}}</font></td>
+		<td>
+			<a class="btn btn-primary btn-block btn-mini" href={{livre.idapple}} target="itunes_store">
+			{% if livre.langue == 'FR' %}
+			T&eacutel&eacutecharger 
+			{% endif %}
+			{% if livre.langue == 'EN' %}
+			Download 
+			{% endif %}
+			{% if livre.langue == 'ES' %}
+			Descargar 
+			{% endif %}
+			<i class="icon-arrow-down icon-white"></i>
+			</a>
+		</td>
+		</tr>
+		{% endfor %}
+		{% endif %}
+	</tbody>
+</table>
+</div>
+
+{% if tous_les_contes.has_previous or tous_les_contes.has_next %}
+<div class="pagination" align="center">
+	<ul>
+        {% if tous_les_contes.has_previous %}
+            	<li class="active">
+			<a href="?page={{ tous_les_contes.previous_page_number }}"  class="btn">Prev</a>
+        {% endif %}
+	{% if not tous_les_contes.has_previous %}
+		<li class="disabled">
+			<a href="">Prev</a>
+	{% endif %}
+		</li>
+        {% if tous_les_contes.has_next %}
+		<li class="active">
+			<a href="?page={{ tous_les_contes.next_page_number }}" class="btn">Next</a>
+	{% endif %}
+	{% if not tous_les_contes.has_next %}
+		<li class="disabled">
+			<a href="">Next</a>
+	{% endif %}
+       		</li>
+	<ul>
+    </span>
+</div>
+{% endif %}
+
+{% endblock %}

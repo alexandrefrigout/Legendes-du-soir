@@ -1,0 +1,14 @@
+{% extends 'lescontes/baseadm.html' %}
+{% block body %}
+	<div align="center">
+	<form action="/editibook/{{ form.initial.id }}" method="POST">{% csrf_token %}
+	{{ form.as_p }}
+	<input type="submit" value="Sauvegarder" />
+	</form>
+	</div>
+	<div align="center">
+		<form action="/adminhome/"  method="GET">
+			<input type="submit" value="Annuler">
+		</form>		
+	</div>
+{% endblock %}
